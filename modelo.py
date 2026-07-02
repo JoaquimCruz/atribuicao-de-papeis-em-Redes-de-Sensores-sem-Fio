@@ -73,7 +73,6 @@ def construirModelo(instancia: dict, tempoLimite: int = 3600,
 
 
     # x[l, j, p] = 1 se sensor l cobre ponto j com papel p  [contínua, 0..1]
-    # (restrição 10)
     x = modelo.addVars(
         [(l, j, p)
          for (l, j) in arcosC
@@ -85,7 +84,6 @@ def construirModelo(instancia: dict, tempoLimite: int = 3600,
     )
 
     # z[l, i, j, p] = 1 se arco (i,j) com papel p está na rota do sensor l  [binária]
-    # (restrição 11)
     z = modelo.addVars(
         [(l, i, j, p)
          for l in indiceSensores
@@ -96,7 +94,6 @@ def construirModelo(instancia: dict, tempoLimite: int = 3600,
     )
 
     # zM[l, i, j, p] = 1 se arco (i,j) sensor->sorvedouro está na rota de l  [binária]
-    # (restrição 11)
     zM = modelo.addVars(
         [(l, i, j, p)
          for l in indiceSensores
@@ -107,7 +104,6 @@ def construirModelo(instancia: dict, tempoLimite: int = 3600,
     )
 
     # t[l, p] = 1 se sensor l está ativo com papel p  [binária]
-    # (restrição 11)
     t = modelo.addVars(
         [(l, p) for l in indiceSensores for p in indicePapeis],
         vtype=GRB.BINARY,
@@ -115,7 +111,6 @@ def construirModelo(instancia: dict, tempoLimite: int = 3600,
     )
 
     # h[j] = quantidade de não-cobertura do ponto j  [inteira >= 0]
-    # (restrição 12)
     h = modelo.addVars(
         indicePontos,
         vtype=GRB.INTEGER,
@@ -290,9 +285,7 @@ def construirModelo(instancia: dict, tempoLimite: int = 3600,
 # @output:
 #   - dict: Dicionário contendo os resultados e estatísticas da otimização.
 def resolverModelo(modelo: gp.Model) -> dict:
-    """
-    Otimiza o modelo e retorna um dicionário com os principais resultados.
-    """
+    
     inicio = time.time()
     modelo.optimize()
     tempoExecucao = time.time() - inicio
@@ -351,7 +344,7 @@ def resolverModelo(modelo: gp.Model) -> dict:
 # @output:
 #   - None: Apenas imprime os resultados formatados na saída padrão.
 def imprimirResultado(resultado: dict, nomeInstancia: str = '') -> None:
-    """Exibe um resumo formatado dos resultados na saída padrão."""
+    
     titulo = f" Resultado: {nomeInstancia} " if nomeInstancia else " Resultado "
     print(f"\n{'='*60}")
     print(titulo.center(60))

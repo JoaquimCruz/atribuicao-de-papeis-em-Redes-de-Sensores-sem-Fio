@@ -31,7 +31,6 @@ CUSTO_RADIO_LIGADO_MAMS   = [21.6, 136.0, 316.0] # mAms por papel
 # @output:
 #   - float: Distância euclidiana entre os dois pontos.
 def _calcularDistancia(coordA: tuple, coordB: tuple) -> float:
-    """Retorna a distância euclidiana entre dois pontos 2D."""
     return math.sqrt((coordA[0] - coordB[0])**2 + (coordA[1] - coordB[1])**2)
 
 
@@ -48,7 +47,7 @@ def _calcularCustoRoteamento(distancia: float, indicePapel: int) -> float:
     Custo = custo_radio_ligado + corrente_transmissao * tempo_transmissao
     A corrente de transmissão cresce linearmente com a distância.
     """
-    correnteTx = CORRENTE_RADIO_LIGADO_MA + distancia * 0.5  # escala linear simples
+    correnteTx = CORRENTE_RADIO_LIGADO_MA + distancia * 0.5  
     custoTx    = correnteTx * TEMPO_TRANSMISSAO_MS[indicePapel]
     return CUSTO_RADIO_LIGADO_MAMS[indicePapel] + custoTx
 
@@ -62,7 +61,6 @@ def _calcularCustoRoteamento(distancia: float, indicePapel: int) -> float:
 # @output:
 #   - list: Lista de tuplas (x, y) com as coordenadas dos sensores.
 def _gerarSensores(numSensores: int, dimensaoArea: float, semente: int) -> list:
-    """Gera coordenadas aleatórias para os nós sensores dentro da área."""
     random.seed(semente)
     sensores = [
         (round(random.uniform(0, dimensaoArea), 4),
@@ -79,7 +77,6 @@ def _gerarSensores(numSensores: int, dimensaoArea: float, semente: int) -> list:
 def _gerarSorvedouros(dimensaoArea: float) -> list:
     """
     Posiciona os 4 sorvedouros nas extremidades da área, conforme o artigo.
-    Ordem: canto inferior-esquerdo, inferior-direito, superior-esquerdo, superior-direito.
     """
     return [
         (0.0, 0.0),
@@ -95,10 +92,7 @@ def _gerarSorvedouros(dimensaoArea: float) -> list:
 # @output:
 #   - list: Lista de tuplas (x, y) com as coordenadas dos pontos de demanda dispostos em grade.
 def _gerarPontosDemanda(numPontos: int, dimensaoArea: float) -> list:
-    """
-    Gera pontos de demanda distribuídos uniformemente em grade na área,
-    conforme descrito no artigo.
-    """
+    
     ladoGrade = math.ceil(math.sqrt(numPontos))
     passo     = dimensaoArea / ladoGrade
     pontos    = []

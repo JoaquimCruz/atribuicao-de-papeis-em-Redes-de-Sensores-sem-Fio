@@ -92,37 +92,300 @@ A implementação foi desenvolvida em **Python 3** utilizando a API **gurobipy**
 Os resultados experimentais consolidados após a execução das 25 instâncias geradas seguindo os parâmetros do artigo são descritos na Tabela 1.
 
 ### Tabela 1: Resumo dos Resultados Experimentais
-| Conjunto | Instância | Sensores ($|N^s|$) | Raios (S/C) | Nós Ativos | Pontos Descobertos | F.O. (mAms) | Tempo Gurobi (s) | Tempo Artigo (s) |
-|---|---|---|---|---|---|---|---|---|
-| **C1** | inst1 | 10 | 7.5 | 5 | 0 | 1648.10 | 0.03 | 0.07 |
-| | inst2 | 10 | 7.5 | 4 | 0 | 1321.97 | 0.04 | 0.58 |
-| | inst3 | 10 | 7.5 | 5 | 0 | 2021.06 | 0.07 | 1.29 |
-| | inst4 | 10 | 7.5 | 6 | 0 | 2330.10 | 0.03 | 0.61 |
-| | inst5 | 10 | 7.5 | 5 | 0 | 1661.72 | 0.03 | 0.64 |
-| | inst6 | 10 | 7.5 | 5 | 0 | 1654.59 | 0.04 | 0.35 |
-| | inst7 | 10 | 7.5 | 4 | 0 | 1324.55 | 0.04 | 0.22 |
-| | inst8 | 10 | 7.5 | 4 | 0 | 1336.71 | 0.04 | 0.27 |
-| | inst9 | 10 | 7.5 | 3 | 0 | 1233.63 | 0.03 | 0.45 |
-| | inst10| 10 | 7.5 | 3 | 0 | 1222.87 | 0.04 | 0.39 |
-| **Média C1**| | | | **4.4** | **0.0** | **1635.53** | **0.04** | **0.49** |
-| **C2** | inst11| 20 | 5.0 | 9 | 0 | 3559.74 | 0.12 | 1.75 |
-| | inst12| 20 | 5.0 | 9 | 0 | 3862.97 | 0.33 | 2.97 |
-| | inst13| 20 | 5.0 | 9 | 0 | 3650.89 | 0.22 | 2.52 |
-| | inst14| 20 | 5.0 | 10 | 0 | 3624.33 | 0.22 | 2.98 |
-| | inst15| 20 | 5.0 | 9 | 0 | 3527.78 | 0.16 | 2.85 |
-| | inst16| 20 | 5.0 | 9 | 0 | 3639.80 | 0.27 | 7.90 |
-| | inst17| 20 | 5.0 | 9 | 0 | 3850.54 | 0.16 | 3.07 |
-| | inst18| 20 | 5.0 | 10 | 0 | 3570.76 | 0.24 | 1.40 |
-| | inst19| 20 | 5.0 | 10 | 0 | 3653.81 | 0.37 | 1.58 |
-| | inst20| 20 | 5.0 | 9 | 0 | 3510.39 | 0.11 | 3.69 |
-| **Média C2**| | | | **9.3** | **0.0** | **3645.10** | **0.22** | **3.07** |
-| **C3** | inst21| 36 | 2.5 | 29 | 11 | 1135373.87 | 115.17 | 166.83 |
-| | inst22| 36 | 2.5 | 32 | 9 | 952681.39 | 12.53 | 1125.42|
-| | inst23| 36 | 2.5 | 33 | 8 | 843695.35 | 26.62 | 292.33 |
-| | inst24| 36 | 2.5 | 30 | 8 | 825799.70 | 5.48 | 5653.79|
-| | inst25| 36 | 2.5 | 31 | 11| 1139011.68 | 19.80 | 3741.93|
-| **Média C3**| | | | **31.0**| **9.4** | **979312.40** | **35.92**| **2196.06**|
-
+<table>
+  <thead>
+    <tr>
+      <th align='center'>Conjunto</th>
+      <th align='left'>Instância</th>
+      <th align='center'>Sensores<br><code>|N<sup>s</sup>|</code></th>
+      <th align='center'>Raios<br>(S/C)</th>
+      <th align='right'>Nós<br>Ativos</th>
+      <th align='right'>Pontos<br>Descobertos</th>
+      <th align='right'>F.O.<br>(mAms)</th>
+      <th align='right'>Tempo<br>Gurobi (s)</th>
+      <th align='right'>Tempo<br>Artigo (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan='11' align='center' valign='middle'><b>C1</b></td>
+      <td align='left'>inst1</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>5</td>
+      <td align='right'>0</td>
+      <td align='right'>1648.10</td>
+      <td align='right'>0.03</td>
+      <td align='right'>0.07</td>
+    </tr>
+    <tr>
+      <td align='left'>inst2</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>4</td>
+      <td align='right'>0</td>
+      <td align='right'>1321.97</td>
+      <td align='right'>0.04</td>
+      <td align='right'>0.58</td>
+    </tr>
+    <tr>
+      <td align='left'>inst3</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>5</td>
+      <td align='right'>0</td>
+      <td align='right'>2021.06</td>
+      <td align='right'>0.07</td>
+      <td align='right'>1.29</td>
+    </tr>
+    <tr>
+      <td align='left'>inst4</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>6</td>
+      <td align='right'>0</td>
+      <td align='right'>2330.10</td>
+      <td align='right'>0.03</td>
+      <td align='right'>0.61</td>
+    </tr>
+    <tr>
+      <td align='left'>inst5</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>5</td>
+      <td align='right'>0</td>
+      <td align='right'>1661.72</td>
+      <td align='right'>0.03</td>
+      <td align='right'>0.64</td>
+    </tr>
+    <tr>
+      <td align='left'>inst6</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>5</td>
+      <td align='right'>0</td>
+      <td align='right'>1654.59</td>
+      <td align='right'>0.04</td>
+      <td align='right'>0.35</td>
+    </tr>
+    <tr>
+      <td align='left'>inst7</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>4</td>
+      <td align='right'>0</td>
+      <td align='right'>1324.55</td>
+      <td align='right'>0.04</td>
+      <td align='right'>0.22</td>
+    </tr>
+    <tr>
+      <td align='left'>inst8</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>4</td>
+      <td align='right'>0</td>
+      <td align='right'>1336.71</td>
+      <td align='right'>0.04</td>
+      <td align='right'>0.27</td>
+    </tr>
+    <tr>
+      <td align='left'>inst9</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>3</td>
+      <td align='right'>0</td>
+      <td align='right'>1233.63</td>
+      <td align='right'>0.03</td>
+      <td align='right'>0.45</td>
+    </tr>
+    <tr>
+      <td align='left'>inst10</td>
+      <td align='center'>10</td>
+      <td align='center'>7.5</td>
+      <td align='right'>3</td>
+      <td align='right'>0</td>
+      <td align='right'>1222.87</td>
+      <td align='right'>0.04</td>
+      <td align='right'>0.39</td>
+    </tr>
+    <tr>
+      <td colspan='3'><b>Média C1</b></td>
+      <td align='right'><b>4.4</b></td>
+      <td align='right'><b>0.0</b></td>
+      <td align='right'><b>1635.53</b></td>
+      <td align='right'><b>0.04</b></td>
+      <td align='right'><b>0.49</b></td>
+    </tr>
+    <tr>
+      <td rowspan='11' align='center' valign='middle'><b>C2</b></td>
+      <td align='left'>inst11</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>9</td>
+      <td align='right'>0</td>
+      <td align='right'>3559.74</td>
+      <td align='right'>0.12</td>
+      <td align='right'>1.75</td>
+    </tr>
+    <tr>
+      <td align='left'>inst12</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>9</td>
+      <td align='right'>0</td>
+      <td align='right'>3862.97</td>
+      <td align='right'>0.33</td>
+      <td align='right'>2.97</td>
+    </tr>
+    <tr>
+      <td align='left'>inst13</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>9</td>
+      <td align='right'>0</td>
+      <td align='right'>3650.89</td>
+      <td align='right'>0.22</td>
+      <td align='right'>2.52</td>
+    </tr>
+    <tr>
+      <td align='left'>inst14</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>10</td>
+      <td align='right'>0</td>
+      <td align='right'>3624.33</td>
+      <td align='right'>0.22</td>
+      <td align='right'>2.98</td>
+    </tr>
+    <tr>
+      <td align='left'>inst15</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>9</td>
+      <td align='right'>0</td>
+      <td align='right'>3527.78</td>
+      <td align='right'>0.16</td>
+      <td align='right'>2.85</td>
+    </tr>
+    <tr>
+      <td align='left'>inst16</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>9</td>
+      <td align='right'>0</td>
+      <td align='right'>3639.80</td>
+      <td align='right'>0.27</td>
+      <td align='right'>7.90</td>
+    </tr>
+    <tr>
+      <td align='left'>inst17</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>9</td>
+      <td align='right'>0</td>
+      <td align='right'>3850.54</td>
+      <td align='right'>0.16</td>
+      <td align='right'>3.07</td>
+    </tr>
+    <tr>
+      <td align='left'>inst18</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>10</td>
+      <td align='right'>0</td>
+      <td align='right'>3570.76</td>
+      <td align='right'>0.24</td>
+      <td align='right'>1.40</td>
+    </tr>
+    <tr>
+      <td align='left'>inst19</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>10</td>
+      <td align='right'>0</td>
+      <td align='right'>3653.81</td>
+      <td align='right'>0.37</td>
+      <td align='right'>1.58</td>
+    </tr>
+    <tr>
+      <td align='left'>inst20</td>
+      <td align='center'>20</td>
+      <td align='center'>5.0</td>
+      <td align='right'>9</td>
+      <td align='right'>0</td>
+      <td align='right'>3510.39</td>
+      <td align='right'>0.11</td>
+      <td align='right'>3.69</td>
+    </tr>
+    <tr>
+      <td colspan='3'><b>Média C2</b></td>
+      <td align='right'><b>9.3</b></td>
+      <td align='right'><b>0.0</b></td>
+      <td align='right'><b>3645.10</b></td>
+      <td align='right'><b>0.22</b></td>
+      <td align='right'><b>3.07</b></td>
+    </tr>
+    <tr>
+      <td rowspan='6' align='center' valign='middle'><b>C3</b></td>
+      <td align='left'>inst21</td>
+      <td align='center'>36</td>
+      <td align='center'>2.5</td>
+      <td align='right'>29</td>
+      <td align='right'>11</td>
+      <td align='right'>1135373.87</td>
+      <td align='right'>115.17</td>
+      <td align='right'>166.83</td>
+    </tr>
+    <tr>
+      <td align='left'>inst22</td>
+      <td align='center'>36</td>
+      <td align='center'>2.5</td>
+      <td align='right'>32</td>
+      <td align='right'>9</td>
+      <td align='right'>952681.39</td>
+      <td align='right'>12.53</td>
+      <td align='right'>1125.42</td>
+    </tr>
+    <tr>
+      <td align='left'>inst23</td>
+      <td align='center'>36</td>
+      <td align='center'>2.5</td>
+      <td align='right'>33</td>
+      <td align='right'>8</td>
+      <td align='right'>843695.35</td>
+      <td align='right'>26.62</td>
+      <td align='right'>292.33</td>
+    </tr>
+    <tr>
+      <td align='left'>inst24</td>
+      <td align='center'>36</td>
+      <td align='center'>2.5</td>
+      <td align='right'>30</td>
+      <td align='right'>8</td>
+      <td align='right'>825799.70</td>
+      <td align='right'>5.48</td>
+      <td align='right'>5653.79</td>
+    </tr>
+    <tr>
+      <td align='left'>inst25</td>
+      <td align='center'>36</td>
+      <td align='center'>2.5</td>
+      <td align='right'>31</td>
+      <td align='right'>11</td>
+      <td align='right'>1139011.68</td>
+      <td align='right'>19.80</td>
+      <td align='right'>3741.93</td>
+    </tr>
+    <tr>
+      <td colspan='3'><b>Média C3</b></td>
+      <td align='right'><b>31.0</b></td>
+      <td align='right'><b>9.4</b></td>
+      <td align='right'><b>979312.40</b></td>
+      <td align='right'><b>35.92</b></td>
+      <td align='right'><b>2196.06</b></td>
+    </tr>
+  </tbody>
+</table>
 ---
 
 ## 6. Comparação com o Artigo Original
