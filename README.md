@@ -402,3 +402,57 @@ Os resultados experimentais consolidados após a execução das 25 instâncias g
 Este projeto reproduziu e validou com sucesso a modelagem matemática e os experimentos computacionais de Souza e Mateus (2006) para a atribuição de papéis em RSSF. A análise matemática crítica permitiu identificar inconsistências lógicas cruciais de formulação, provendo as correções devidas sob a perspectiva da engenharia e da física de redes de computadores.
 
 Os resultados obtidos demonstram de forma clara as propriedades e limitações de projetos de redes de sensores: à medida que a restrição de raio físico de sensoriamento e comunicação diminui, a rede torna-se sensivelmente mais cara, exige a ativação de quase a totalidade dos sensores disponíveis e expõe pontos descobertos à penalidade de não cobertura. A validação exaustiva via Python e Gurobi corrobora o sucesso absoluto da implementação para a submissão final da disciplina de Pesquisa Operacional.
+
+---
+
+## 8. Como Rodar o Projeto
+
+Para configurar o ambiente e executar os experimentos de otimização, siga as etapas abaixo.
+
+### Pré-requisitos
+1. **Python 3**: Certifique-se de ter o Python 3.10 ou superior instalado no seu sistema.
+2. **Gurobi Optimizer**: O modelo matemático utiliza o solver Gurobi (`gurobipy`). Certifique-se de possuir uma licença ativa do Gurobi (por exemplo, licença acadêmica ou de teste) configurada na sua máquina para evitar erros de limites de variáveis na execução.
+
+### Execução via Script Automatizado (`run.sh`)
+Criamos um script shell chamado `run.sh` que automatiza a criação do ambiente virtual Python, instalação das dependências e execução do projeto.
+
+1. Torne o script executável (caso ainda não seja):
+   ```bash
+   chmod +x run.sh
+   ```
+
+2. Execute o script principal (isso criará a pasta `venv/`, instalará as dependências listadas em `requirements.txt` e iniciará todos os experimentos):
+   ```bash
+   ./run.sh
+   ```
+
+### Execução Personalizada
+Você pode passar parâmetros diretamente ao script `run.sh` (que serão repassados ao script `main.py`). Exemplos de uso:
+
+* **Apenas gerar instâncias (sem resolver a otimização):**
+  ```bash
+  ./run.sh --apenasGerar
+  ```
+
+* **Desativar a plotagem gráfica de topologia (execução mais rápida):**
+  ```bash
+  ./run.sh --semGraficos
+  ```
+
+* **Definir um limite de tempo (por exemplo, 10 minutos / 600 segundos por instância):**
+  ```bash
+  ./run.sh --tempoLimite 600
+  ```
+
+* **Executar apenas conjuntos de instâncias específicos:**
+  ```bash
+  ./run.sh --conjuntos conjunto1 conjunto2
+  ```
+
+### Estrutura de Recursos Criados
+* `requirements.txt`: Lista de pacotes do Python necessários (`gurobipy` e `matplotlib`).
+* `venv/`: Diretório do ambiente virtual Python.
+* `instancias/`: Contém os arquivos JSON com os dados gerados de cada rede sensor.
+* `resultados/`: Contém arquivos JSON com o detalhamento das decisões tomadas pelo modelo e uma pasta `resultados/graficos/` com as topologias renderizadas em formato `.png`.
+* `resultados/tabela_resultados.csv`: Tabela consolidada com os dados de desempenho (tempo, gap, FO, sensores ativos) para cada instância testada.
+
